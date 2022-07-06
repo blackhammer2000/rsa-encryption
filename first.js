@@ -1,20 +1,4 @@
-// let name = "ROBERT";
-// console.log(name);
-// console.log(name);
-// console.log(name);
-// console.log(name);
-// console.log(name);
-// console.log(name);
-// console.log(name);
-// console.log(name);
+let num1 = 4;
+let num2 = 2;
 
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
-console.log("ROBERT");
+console.log(num1 / num2);

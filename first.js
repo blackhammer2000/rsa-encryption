@@ -26,14 +26,14 @@ console.log(generateEncryptionKey(2, 7));
 const generateDecryptionKey = (standard1, standard2) => {};
 //////////////////////////////////
 
-// const encrypt = (data, standard1, standard2) => {
-//   const encryptedData = Math.pow(data, standard1) % standard2;
+// const encrypt = (data, encryptionKey) => {
+//   const encryptedData = Math.pow(data, encryptionKey[0]) % encryptionKey[1];
 //   return encryptedData;
 // };
 
 //////////////////////////////////
 
-// const decryptedMessage = (data, standard1, standard2) => {
-//   const decryptedData = Math.ceil(Math.pow(data, standard1) % standard2);
+// const decryptedMessage = (data, encryptionKey) => {
+//   const decryptedData = Math.ceil(Math.pow(data, encryptionKey[0]) % encryptionKey[1]);
 //   return decryptedData;
 // };

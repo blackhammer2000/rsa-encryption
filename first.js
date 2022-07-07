@@ -1,16 +1,39 @@
-const encrypt = (data, standard1, standard2) => {
-  const encryptedData = Math.pow(data, standard1) % standard2;
-  return encryptedData;
-};
+function generateEncryptionKey(standard1, standard2) {
+  const product_N = standard1 * standard2;
+  let coPrimeNumbers = [];
 
-const decryptedMessage = (data, standard1, standard2) => {
-  const decryptedData = Math.ceil(Math.pow(data, standard1) % standard2);
-  return decryptedData;
-};
+  for (let number = 1; number <= product_N; number++) {
+    if (
+      number % standard1 !== 0 &&
+      number % standard2 !== 0 &&
+      product_N % number !== 0
+    )
+      coPrimeNumbers.push(number);
+  }
 
-const eMessage = encrypt(2, 5, 14);
-const dMessage = encrypt(eMessage, 20, 14);
+  const fineFunctionOfTheEquation = (standard1 - 1) * (standard2 - 1);
 
-console.log(eMessage, dMessage);
+  const encryptionNumber = coPrimeNumbers.find((number) => {
+    if (product_N % number !== 0 && fineFunctionOfTheEquation % number !== 0)
+      return number;
+  });
 
-// const formula =  19d (%ff) = 1
+  return [encryptionNumber, product_N];
+}
+
+console.log(generateEncryptionKey(2, 7));
+
+const generateDecryptionKey = (standard1, standard2) => {};
+//////////////////////////////////
+
+// const encrypt = (data, standard1, standard2) => {
+//   const encryptedData = Math.pow(data, standard1) % standard2;
+//   return encryptedData;
+// };
+
+//////////////////////////////////
+
+// const decryptedMessage = (data, standard1, standard2) => {
+//   const decryptedData = Math.ceil(Math.pow(data, standard1) % standard2);
+//   return decryptedData;
+// };

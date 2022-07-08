@@ -1,5 +1,7 @@
 function generateEncryptionKey(standard1, standard2) {
   const product_N = standard1 * standard2;
+  const fineFactor = (standard1 - 1) * (standard2 - 1);
+
   let coPrimeNumbers = [];
 
   for (let number = 1; number <= product_N; number++) {
@@ -11,19 +13,30 @@ function generateEncryptionKey(standard1, standard2) {
       coPrimeNumbers.push(number);
   }
 
-  const fineFunctionOfTheEquation = (standard1 - 1) * (standard2 - 1);
-
   const encryptionNumber = coPrimeNumbers.find((number) => {
-    if (product_N % number !== 0 && fineFunctionOfTheEquation % number !== 0)
-      return number;
+    if (product_N % number !== 0 && fineFactor % number !== 0) return number;
   });
 
-  return [encryptionNumber, product_N];
+  return [encryptionNumber, product_N, fineFactor];
 }
 
-console.log(generateEncryptionKey(2, 7));
+let encKey = generateEncryptionKey(2, 7);
+console.log(encKey);
 
-const generateDecryptionKey = (standard1, standard2) => {};
+/////////////RSA DECRYPTION KEY GENERATOR////////////////////////
+
+const generateDecryptionKey = (encryptionKey, fineFactor) => {
+  // formula = (encryptionKey * decryptionKey) % finefactor = 1
+
+  let decryptionKey = 1;
+
+  while (((decryptionKey * encryptionKey) % fineFactor) - 1 === 0) {
+    decryptionKey++;
+  }
+  return decryptionKey;
+};
+
+console.log(generateDecryptionKey(encKey[0], encKey[2]));
 //////////////////////////////////
 
 // const encrypt = (data, encryptionKey) => {

@@ -1,3 +1,5 @@
+/////////RSA ENCRYPTION KEY GENERATOR///////////////////////////
+
 function generateEncryptionKey(standard1, standard2) {
   const product_N = standard1 * standard2;
   const fineFactor = (standard1 - 1) * (standard2 - 1);
@@ -13,15 +15,13 @@ function generateEncryptionKey(standard1, standard2) {
       coPrimeNumbers.push(number);
   }
 
-  // console.log(coPrimeNumbers);
-
   const encryptionNumber = coPrimeNumbers.find((number) => {
     if (product_N % number !== 0 && fineFactor % number !== 0) return number;
   });
 
   return [encryptionNumber, product_N, fineFactor];
 }
-let encryptionKey = generateEncryptionKey(2, 7);
+const encryptionKey = generateEncryptionKey(2, 7);
 console.log(encryptionKey);
 
 /////////////RSA DECRYPTION KEY GENERATOR////////////////////////
@@ -42,24 +42,71 @@ const generateDecryptionKey = (encryptionKey) => {
 const decryptionKey = generateDecryptionKey(encryptionKey);
 console.log(decryptionKey);
 
-//////////////////////////////////
+///////////////////FUNCTION THAT ENCRYPTS THE ASCII CODE OF EVERY CHARACTER////////////////////////////////
 
-// const encryptMessage = (data, encryptionKey) => {
-//   const encryptedData = Math.pow(data, encryptionKey[0]) % encryptionKey[1];
-//   return encryptedData;
-// };
+const encryptAsciiCode = (asciiCode, encryptionKey) => {
+  const encryptedAsciiCode = Math.floor(
+    Math.pow(asciiCode, encryptionKey[0]) % encryptionKey[1]
+  );
+  return encryptedAsciiCode;
+};
 
-// const message = encryptMessage(2, encryptionKey);
-// console.log(message);
+// const eCode = encrypt(2, encryptionKey);
+// console.log(eCode);
 
-//////////////////////////////////
+///////////////////FUNCTION THAT DECRYPTS THE ASCII CODE OF EVERY CHARACTER////////////////////////////////
 
-// const decryptMessage = (data, decryptionKey) => {
-//   const decryptedData = Math.ceil(
-//     Math.pow(data, decryptionKey[0]) % decryptionKey[1]
-//   );
-//   return decryptedData;
-// };
+const decryptAsciiCode = (asciiCode, decryptionKey) => {
+  const decryptedAsciiCode = Math.ceil(
+    Math.pow(asciiCode, decryptionKey[0]) % decryptionKey[1]
+  );
+  return decryptedAsciiCode;
+};
 
-// const dMessage = decryptMessage(message, decryptionKey);
-// console.log(dMessage);
+// const dCode = decrypt(eCode, decryptionKey);
+// console.log(dCode);
+
+/////////////////////////MAIN ENCRYPTION FUNCTION////////////////////////////////
+
+const encrypt = (message, encryptionKey, encryptAsciiCode) => {
+  const messageArray = message.split("");
+  let encryptedAsciiCodes = [];
+  let encryptedCharacters = [];
+
+  messageArray.forEach((character) => {
+    const asciiCode = character.charCodeAt();
+    const encryptedAsciiCode = encryptAsciiCode(asciiCode, encryptionKey);
+    const encryptedCipherCharacter = String.fromCharCode(encryptedAsciiCode);
+
+    encryptedAsciiCodes.push(encryptedAsciiCode);
+    encryptedCharacters.push(encryptedCipherCharacter);
+  });
+
+  return encryptedAsciiCodes;
+};
+
+const testMessage = "a";
+console.log(testMessage.charCodeAt());
+const testEncryption = encrypt(testMessage, encryptionKey, encryptAsciiCode);
+console.log(testEncryption);
+
+/////////////////////MAIN DECRYPTION FUNCTION///////////////////////////////
+
+const decrypt = (encryptedCodes, decryptionKey, decryptAsciiCode) => {
+  let decryptedAsciiCodes = [];
+  let decryptedCharacters = [];
+
+  encryptedCodes.forEach((code) => {
+    const decryptedCode = decryptAsciiCode(code, decryptionKey);
+    const decryptedCipherCharacter = String.fromCharCode(decryptedCode);
+
+    decryptedAsciiCodes.push(decryptedCode);
+    decryptedCharacters.push(decryptedCipherCharacter);
+  });
+
+  // return decryptedAsciiCodes;
+  return decryptedAsciiCodes;
+};
+
+const testDecryption = decrypt(testEncryption, decryptionKey, decryptAsciiCode);
+console.log(testDecryption);

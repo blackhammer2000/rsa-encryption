@@ -51,8 +51,8 @@ const encryptAsciiCode = (asciiCode, encryptionKey) => {
   return encryptedAsciiCode;
 };
 
-// const eCode = encrypt(2, encryptionKey);
-// console.log(eCode);
+const eCode = encryptAsciiCode(2, encryptionKey);
+console.log(eCode);
 
 ///////////////////FUNCTION THAT DECRYPTS THE ASCII CODE OF EVERY CHARACTER////////////////////////////////
 
@@ -63,8 +63,8 @@ const decryptAsciiCode = (asciiCode, decryptionKey) => {
   return decryptedAsciiCode;
 };
 
-// const dCode = decrypt(eCode, decryptionKey);
-// console.log(dCode);
+const dCode = decryptAsciiCode(eCode, decryptionKey);
+console.log(dCode);
 
 /////////////////////////MAIN ENCRYPTION FUNCTION////////////////////////////////
 
@@ -104,7 +104,6 @@ const decrypt = (encryptedCodes, decryptionKey, decryptAsciiCode) => {
     decryptedCharacters.push(decryptedCipherCharacter);
   });
 
-  // return decryptedAsciiCodes;
   return decryptedAsciiCodes;
 };
 

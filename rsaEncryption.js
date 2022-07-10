@@ -32,7 +32,7 @@ const generateDecryptionKey = (encryptionKey) => {
   while (decryptionKey) {
     if (
       (decryptionKey * encryptionKey[0]) % encryptionKey[2] === 1 &&
-      decryptionKey !== encryptionKey[0]
+      decryptionKey > encryptionKey[0]
     )
       return [decryptionKey, encryptionKey[1]];
     decryptionKey++;
@@ -51,7 +51,7 @@ const encryptAsciiCode = (asciiCode, encryptionKey) => {
   return encryptedAsciiCode;
 };
 
-const eCode = encryptAsciiCode(10, encryptionKey);
+const eCode = encryptAsciiCode(2, encryptionKey);
 console.log(eCode);
 
 ///////////////////FUNCTION THAT DECRYPTS THE ASCII CODE OF EVERY CHARACTER////////////////////////////////

@@ -45,9 +45,9 @@ console.log(decryptionKey);
 ///////////////////FUNCTION THAT ENCRYPTS THE ASCII CODE OF EVERY CHARACTER////////////////////////////////
 
 const encryptAsciiCode = (asciiCode, encryptionKey) => {
-  const encryptedAsciiCode = Math.ceil(
-    Math.pow(asciiCode, encryptionKey[0]) % encryptionKey[1]
-  );
+  const encryptedAsciiCode =
+    Math.pow(asciiCode, encryptionKey[0]) % encryptionKey[1];
+
   return encryptedAsciiCode;
 };
 
